@@ -33,9 +33,9 @@ jobs:
           pip install flet==0.22.1
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      # FIX: Yahan humne APK ke andar Android 16 ki permissions force-inject kar di hain
+      # FIX: Yahan se unrecognized flag hata diya hai. Ab ye safely build karega.
       - name: Build APK with Flet
-        run: flet build apk --permissions storage,manageExternalStorage,photos,videos,audio
+        run: flet build apk
 
       - name: Upload APK File
         uses: actions/upload-artifact@v4
