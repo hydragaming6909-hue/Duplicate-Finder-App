@@ -11,7 +11,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Java (Android ke liye)
+      - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
@@ -33,11 +33,12 @@ jobs:
           pip install flet==0.22.1
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
+      # FIX: Yahan humne APK ke andar Android 16 ki permissions force-inject kar di hain
       - name: Build APK with Flet
-        run: flet build apk
+        run: flet build apk --permissions storage,manageExternalStorage,photos,videos,audio
 
       - name: Upload APK File
         uses: actions/upload-artifact@v4
         with:
           name: duplicate-finder-apk
-          path: build/apk/**/*.apk
+          path: build/
